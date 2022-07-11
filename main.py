@@ -11,14 +11,18 @@
 #
 #     It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms.
 #
-# Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
-# Which starting number, under one million, produces the longest chain?
-# NOTE: Once the chain starts the terms are allowed to go above one million.
+#     Although it has not been proved yet (Collatz Problem),
+#       it is thought that all starting numbers finish at 1.
+#     Which starting number, under one million, produces the longest chain?
+#
+#     NOTE: Once the chain starts the terms are allowed to go above one million.
+
+from typing import List, Tuple
 
 COLLATZ = dict()
 
 
-def collatz_count(x):
+def collatz_count(x: int) -> int:
     """
     Returns the number of elements in the Collatz chain starting with `x`
       and (presumably) ending with 1.
@@ -27,10 +31,10 @@ def collatz_count(x):
         x (int): Natural number
 
     Returns:
-        Length of Collatz chain for `x`
+        (int): Length of Collatz chain for `x`
 
     Raises:
-        AsserError: if incorrect params are given
+        AssertError: if incorrect args are given
     """
     assert type(x) == int and x > 0
     global COLLATZ
@@ -41,19 +45,22 @@ def collatz_count(x):
     return COLLATZ[x]
 
 
-def main(n):
+def main(n: int) -> Tuple[int, List[int]]:
     """
-    Returns the number (less than `n`) which produces the longest Collatz chain,
+    Returns the number (< `n`) which produces the longest Collatz chain,
       as well as the chain itself.
 
     Args:
         n (int): Natural number greater than 1
 
     Returns:
-        Tuple of number less than `n` producing the largest Collatz chain, and the chain.
+        (Tuple[int, List[int]]):
+            Tuple of ...
+              * Number less than `n` producing the largest Collatz chain
+              * The chain itself
 
     Raises:
-        AssertError: if incorrect params are given
+        AssertError: if incorrect args are given
     """
     assert type(n) == int and n > 1
 
@@ -84,4 +91,5 @@ if __name__ == '__main__':
     print('Longest chain starting below {}:'.format(num))
     print('  Starts at {}'.format(start))
     print('  Length is {}'.format(len(chain)))
-    print('  Chain:\n    {}'.format('\n    → '.join(map(str, chain))))
+    print('  Chain:')
+    print('    {}'.format('\n    → '.join(map(str, chain))))
